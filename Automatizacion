@@ -1,0 +1,77 @@
+/** CONTROLADOR TEMP FUZZY 
+
+	FUSIFICACIÓN
+
+*/	
+
+float pertenencia_MUCHOfrio;
+
+//      		PERTENENCIA A OK
+
+if ((error_T_FUZZY>=0) && (error_T_FUZZY<=50))
+{
+ pertenecia_OK=1; 
+}
+
+
+if ((error_T_FUZZY>50) && (error_T_FUZZY<=75))
+{
+ pertenecia_OK=(-1/25)*error_T_FUZZY+3; 
+}
+
+
+if (error_T_FUZZY>75)
+{
+ pertenecia_OK=0; 
+}
+
+	
+//     	 PERTENENCIA A FRIO
+
+if ((error_T_FUZZY>=100) && (error_T_FUZZY<175) )
+{
+ pertenecia_FRIO=1 ;
+}
+
+
+if ((error_T_FUZZY>=50) && (error_T_FUZZY<100))
+{
+ pertenecia_FRIO=(1/50)*error_T_FUZZY-1; 
+}
+
+
+if ((error_T_FUZZY>=175) && (error_T_FUZZY<=200))
+{
+ pertenecia_FRIO=(-1/25)*error_T_FUZZY+8; 
+}
+
+
+if ((error_T_FUZZY<50) && (error_T_FUZZY>200) )
+{
+ pertenecia_FRIO=0; 
+}
+
+
+//       PERTENENCIA A MUCHOfrio
+
+if (error_T_FUZZY>=225)
+{
+ pertenecia_MUCHOfrio=1 ;
+}
+
+if ((error_T_FUZZY>=175) && (error_T_FUZZY<225))
+{
+ pertenecia_MUCHOfrio=(1/50)*error_T_FUZZY+3; 
+}
+
+if (error_T_FUZZY<175)
+{
+ pertenecia_MUCHOfrio=0; 
+}
+
+
+
+
+// 		DESFUSIFICACIÓN
+
+senal_control_FUZZY=pertenecia_OK*10+pertenecia_FRIO*998+pertenencia_MUCHOfrio*1200;
